@@ -2424,7 +2424,7 @@ export default function Portfolio() {
                   "LinkedIn",
                   "https://www.linkedin.com/in/subha-pattanayak-8a8165254/",
                 ],
-                ["GitHub", "https://github.com/DevOP67"],
+                ["GitHub", "https://github.com/DevOP67?tab=repositories"],
                 ["LeetCode", "https://leetcode.com/subha_pattanayak"],
               ].map(([label, href]) => (
                 <a
