@@ -2420,10 +2420,12 @@ export default function Portfolio() {
             </div>
             <div className="socials">
               {[
-                ["LinkedIn", "https://linkedin.com"],
-                ["GitHub", "https://github.com"],
-                ["LeetCode", "https://leetcode.com"],
-                ["CodeChef", "https://codechef.com"],
+                [
+                  "LinkedIn",
+                  "https://www.linkedin.com/in/subha-pattanayak-8a8165254/",
+                ],
+                ["GitHub", "https://github.com/DevOP67"],
+                ["LeetCode", "https://leetcode.com/subha_pattanayak"],
               ].map(([label, href]) => (
                 <a
                   key={label}
@@ -2450,3 +2452,6 @@ export default function Portfolio() {
     </div>
   );
 }
+//https://github.com/DevOP67
+//https://www.linkedin.com/in/subha-pattanayak-8a8165254/
+//https://leetcode.com/subha_pattanayak/
