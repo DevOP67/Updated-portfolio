@@ -201,14 +201,32 @@ const GLOBAL_CSS = `
   .scroll-bar { width:1px; height:40px; background:linear-gradient(to bottom,${C.accent},transparent); animation:pulse 2.2s ease-in-out infinite; }
 
   /* ABOUT */
-  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
-  .about-canvas-wrap { height:380px; border-radius:12px; border:1px solid ${C.border}; overflow:hidden; }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+  .about-canvas-wrap { height:380px; border-radius:12px; border:1px solid ${C.border}; overflow:hidden; width: 100%; }
   .about-p { font-size:.78rem; line-height:2; color:${C.muted}; margin-bottom:.8rem; }
   .stats { display:flex; gap:2rem; margin-top:1.5rem; }
-  .stat { border-left:2px solid ${C.accent}; padding-left:.85rem; }
+  @media (max-width: 768px){.stat { border-left:2px solid ${C.accent}; padding-left:.85rem; justify-content: space-between; }}
   .stat-n { font-family:'Syne',sans-serif; font-size:2rem; font-weight:800; }
   .stat-l { font-size:.64rem; color:${C.muted}; letter-spacing:.08em; margin-top:.1rem; }
+  @media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;   /* stack */
+    gap: 1.5rem;                 /* reduce gap */
+  }
 
+  .about-canvas-wrap {
+    height: 260px;              /* reduce height */
+  }
+  .about-p {
+    font-size: 0.8rem;
+    line-height: 1.8;
+  }
+}
+  .section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.2rem;
+}
   /* SKILLS */
   .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.1rem; }
   .sk-card {
@@ -263,9 +281,48 @@ const GLOBAL_CSS = `
   .sk-tags { display:flex; flex-wrap:wrap; gap:.35rem; }
   .sk-tag { font-size:.68rem; padding:.22rem .6rem; border:1px solid ${C.border}; border-radius:4px; color:${C.text}; transition:all .18s; }
   .sk-tag:hover { border-color:${C.accent}; color:${C.accent}; }
+  .skills-grid > div {
+  width: 100%;
+}
 
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .sk-card {
+    padding: 1.2rem;
+  }
+
+  .sk-tags {
+    gap: 0.4rem;
+  }
+
+  .sk-tag {
+    font-size: 0.7rem;
+  }
+
+  #skills {
+    text-align: left;
+  }
+}
+
+#skills {
+  overflow-x: hidden;
+}
   /* BUILDING */
-  .building-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.1rem; margin-top:2rem; }
+  .building-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+  .section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.2rem;
+}
   .build-card {
   position: relative;
   overflow: hidden;
@@ -276,6 +333,29 @@ const GLOBAL_CSS = `
   gap: .65rem;
 
   border-radius: 16px;
+  @media (max-width: 768px) {
+  .building-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .build-card {
+    padding: 1.2rem;
+  }
+
+  .build-title {
+    font-size: 0.9rem;
+  }
+
+  .build-desc {
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  .build-status {
+    font-size: 0.55rem;
+  }
+}
 
   /* GLASSMORPHISM */
   background: rgba(13, 21, 38, 0.35);
@@ -1220,10 +1300,10 @@ function PlanetHUD({ active }) {
     <div
       style={{
         position: "fixed",
-        bottom: "1.75rem",
-        right: "20px",
+        bottom: window.innerWidth < 768 ? "4.5rem" : "1.75rem",
+        right: window.innerWidth < 768 ? "50%" : "20px",
         left: "auto",
-        transform: "none",
+        transform: window.innerWidth < 768 ? "translateX(50%)" : "none",
         zIndex: 10,
         pointerEvents: "none",
         textAlign: "center",
