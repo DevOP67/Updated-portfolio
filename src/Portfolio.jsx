@@ -397,7 +397,7 @@ const GLOBAL_CSS = `
 .build-card:hover::after {
   opacity: 1;
 }
-  .build-icon { font-size:1.4rem; }
+  .build-icon { width:40px; height:40px; display:flex; align-items:center; justify-content:center; border-radius:8px; border:1px solid ${C.border}; background:rgba(255,255,255,.03); }
   .build-title { font-family:'Syne',sans-serif; font-size:.95rem; font-weight:700; }
   .build-desc { font-size:.74rem; line-height:1.75; color:${C.muted}; flex:1; }
   .build-status { display:inline-flex; align-items:center; gap:.4rem; font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; }
@@ -554,6 +554,72 @@ const GLOBAL_CSS = `
   /* FOOTER */
   footer { padding:1.5rem 5vw; border-top:1px solid ${C.border}; display:flex; justify-content:space-between; align-items:center; font-size:.66rem; color:${C.muted}; position:relative; z-index:2; }
 
+  .tl-item {
+    border-radius:14px;
+    background:rgba(13,21,38,.72); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .tl-item:last-child { margin-bottom:0 !important; }
+  .tl-list li, .proj-desc, .build-desc, .about-p, .dsa-desc, .hero-desc { color:#94a3b8; }
+
+  /* ── DESKTOP LAYOUT ── */
+  @media(min-width:769px){
+    .section-inner { padding:8.5rem 1.2rem; }
+    .tl-item { padding:1.4rem 1.6rem; margin-bottom:1.25rem; }
+    .tl-dot { top:1.65rem; }
+  }
+  @media(min-width:960px){
+    /* Hero: left-aligned so the solar system stays visible */
+    #hero { align-items:flex-start; text-align:left; padding:8rem max(2rem, calc((100vw - 1060px) / 2)) 4rem; }
+    .hero-name { font-size:clamp(4rem,7vw,6rem); }
+    .hero-eyebrow::after { display:none; }
+    .hero-desc { margin-left:0; }
+    .hero-pills, .hero-btns { justify-content:flex-start; max-width:560px; }
+    .scroll-cue { left:max(2rem, calc((100vw - 1060px) / 2)); align-items:flex-start; }
+
+    /* About: copy first, scene second, stats as a strip */
+    .about-grid { grid-template-columns:1.2fr .8fr; gap:4rem; }
+    .about-canvas-wrap { order:2; }
+    .stats { gap:0; margin-top:2rem; border-top:1px solid ${C.border}; padding-top:1.5rem; }
+    .stat { flex:1; }
+    .stat + .stat { border-left:1px solid ${C.border}; padding-left:1.5rem; }
+
+    /* Header beside content */
+    .split { display:grid; grid-template-columns:290px minmax(0,1fr); gap:3.5rem; align-items:start; }
+    .split-head .sec-title { font-size:1.85rem; }
+    .split-head { position:sticky; top:6rem; }
+    .split .timeline, .split .edu-grid { margin-top:0; }
+
+    /* Skills: one category per row */
+    .skills-grid { grid-template-columns:1fr; gap:.6rem; }
+    .sk-card { display:grid; grid-template-columns:190px 1fr; gap:1rem; align-items:center; padding:.95rem 1.25rem; border-radius:12px; }
+    .sk-card:hover { transform:none; }
+    .sk-cat { margin-bottom:0; }
+
+    /* Projects: lead project spans the full row */
+    .proj-grid { grid-template-columns:1fr 1fr; }
+    .proj-card:first-child { grid-column:1 / -1; display:grid; grid-template-columns:1.1fr 1fr; }
+    .proj-card:first-child .proj-canvas-wrap { height:100%; min-height:280px; }
+    .proj-card:first-child .proj-body { display:flex; flex-direction:column; justify-content:center; padding:2.25rem; }
+    .proj-card:first-child .proj-title { font-size:1.6rem; }
+
+    /* Education: rows with the score on the right */
+    .edu-grid { grid-template-columns:1fr; }
+    .edu-card { display:grid; grid-template-columns:1fr auto; column-gap:1.5rem; align-items:center; padding:1.25rem 1.5rem; }
+    .edu-score-wrap { grid-column:2; grid-row:1 / span 3; margin-top:0; padding-top:0; text-align:right; }
+
+    /* Contact: details left, form right */
+    .contact-wrap { max-width:none; text-align:left; display:grid; grid-template-columns:1fr 1fr; column-gap:4rem; align-items:start; }
+    .contact-wrap > * { grid-column:1; }
+    .contact-wrap > .sec-label { justify-content:flex-start !important; }
+    .contact-wrap > p { margin:0 !important; }
+    .contact-wrap > .cf-form { grid-column:2; grid-row:1 / span 7; margin:0; max-width:none; }
+    .contact-title { font-size:clamp(2.2rem,3.6vw,3rem); }
+    .contact-email { justify-self:start; }
+    .cinfo-grid { margin:0 0 1.25rem; max-width:none; }
+    .socials { justify-content:flex-start; margin-top:0; }
+  }
+
   /* ── MOBILE FIXES ── */
   @media(max-width:768px){
 
@@ -561,7 +627,7 @@ const GLOBAL_CSS = `
     #hero { padding:7rem 1.5rem 5rem; min-height:100svh; }
     .hero-eyebrow { font-size:.58rem; gap:.6rem; }
     .hero-eyebrow::before,.hero-eyebrow::after { width:20px; }
-    .hero-name { font-size:clamp(2.6rem,13vw,4.5rem); letter-spacing:-.04em; }
+    .hero-name { font-size:clamp(1.75rem,9.5vw,4.5rem); letter-spacing:-.04em; }
     .hero-role { font-size:1rem; margin-top:1rem; }
     .hero-desc { font-size:.76rem; padding:0 .5rem; }
     .hero-pills { gap:.35rem; }
@@ -571,7 +637,7 @@ const GLOBAL_CSS = `
     .scroll-cue { display:none; }
 
     /* SECTION INNER */
-    .section-inner { padding:3rem 1.25rem; }
+    .section-inner { padding:5rem 1.25rem; }
 
     /* SEC TITLES */
     .sec-title { font-size:clamp(1.5rem,7vw,2.2rem); }
@@ -592,8 +658,8 @@ const GLOBAL_CSS = `
 
     /* EXPERIENCE */
     .timeline { padding-left:1.5rem; }
-    .tl-item { padding-left:1.5rem; margin-bottom:2rem; }
-    .tl-dot { left:-1.85rem; }
+    .tl-item { padding:1.1rem 1.15rem; margin-bottom:1rem; }
+    .tl-dot { left:-1.85rem; top:1.3rem; }
     .tl-role { font-size:1rem; }
     .tl-list li { font-size:.73rem; }
 
@@ -637,8 +703,7 @@ const GLOBAL_CSS = `
   }
 
   @media(max-width:380px){
-    .hero-name { font-size:clamp(2.2rem,11vw,3rem); }
-    .cinfo-grid { grid-template-columns:1fr; }
+        .cinfo-grid { grid-template-columns:1fr; }
     .hero-eyebrow { font-size:.52rem; letter-spacing:.2em; }
   }
 
@@ -1361,9 +1426,20 @@ function PlanetHUD({ active }) {
             letterSpacing: ".08em",
           }}
         >
-          {planet.name === "Earth"
-            ? "📍 Bengaluru, India"
-            : planet.desc || active.replace("-", " ")}
+          {planet.name === "Earth" ? (
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: ".3rem",
+              }}
+            >
+              <Icon size={11}>{ICON_PIN}</Icon>
+              Bengaluru, India
+            </span>
+          ) : (
+            planet.desc || active.replace("-", " ")
+          )}
         </span>
       </div>
     </div>
@@ -1668,15 +1744,63 @@ function useReveal(selector) {
 }
 
 /* ─────────────────────────────────────────────
+   LINE ICONS
+───────────────────────────────────────────── */
+function Icon({ size = 20, children }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {children}
+    </svg>
+  );
+}
+
+const ICON_NETWORK = (
+  <>
+    <circle cx="12" cy="5" r="2.5" />
+    <circle cx="5" cy="19" r="2.5" />
+    <circle cx="19" cy="19" r="2.5" />
+    <path d="M10.8 7.2 6.2 16.8M13.2 7.2l4.6 9.6M7.5 19h9" />
+  </>
+);
+const ICON_CODE = (
+  <path d="m16 18 6-6-6-6M8 6l-6 6 6 6M14 4l-4 16" />
+);
+const ICON_LAYERS = (
+  <path d="M12 2 2 7l10 5 10-5-10-5ZM2 12l10 5 10-5M2 17l10 5 10-5" />
+);
+const ICON_PIN = (
+  <>
+    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+    <circle cx="12" cy="10" r="3" />
+  </>
+);
+
+/* ─────────────────────────────────────────────
    MARQUEE DATA
 ───────────────────────────────────────────── */
 const MARQUEE_ITEMS = [
   "React.js",
   "Node.js",
   "TypeScript",
+  "Python",
+  "FastAPI",
+  "Strapi",
   "MongoDB",
   "PostgreSQL",
   "Docker",
+  "AWS EC2",
+  "Playwright",
+  "Sentry",
   "MLflow",
   "LangChain",
   "HuggingFace",
@@ -1830,17 +1954,17 @@ function ContactForm() {
 
       {status === "ok" && (
         <div className="cf-msg ok">
-          ✓ Message sent! I'll get back to you soon.
+          Message sent! I'll get back to you soon.
         </div>
       )}
       {status === "err" && (
         <div className="cf-msg err">
-          ✗ Something went wrong. Try again or email me directly.
+          Something went wrong. Try again or email me directly.
         </div>
       )}
       {status === "err-empty" && (
         <div className="cf-msg err">
-          ✗ Please fill in your name, email and message.
+          Please fill in your name, email and message.
         </div>
       )}
     </form>
@@ -1941,9 +2065,9 @@ export default function Portfolio() {
         <ul className="nav-desktop">
           {[
             ["#about", "About"],
-            ["#skills", "Skills"],
             ["#experience", "Experience"],
             ["#projects", "Projects"],
+            ["#skills", "Skills"],
             ["#contact", "Contact"],
           ].map(([id, label]) => (
             <li key={id}>
@@ -1974,9 +2098,9 @@ export default function Portfolio() {
         <ul className="drawer-links">
           {[
             ["#about", "About"],
-            ["#skills", "Skills"],
             ["#experience", "Experience"],
             ["#projects", "Projects"],
+            ["#skills", "Skills"],
             ["#contact", "Contact"],
           ].map(([id, label]) => (
             <li key={id}>
@@ -1991,28 +2115,29 @@ export default function Portfolio() {
       {/* ── HERO ── */}
       <section id="hero">
         <div className="hero-eyebrow fade-up d1">
-          Final Year CS Engineer · Class of 2026
+          Computer Science Graduate · Class of 2026
         </div>
         <h1 className="hero-name fade-up d2">
           Subha
           <span className="ghost">Pattanayak</span>
         </h1>
         <p className="hero-role fade-up d3">
-          Full-Stack Developer &amp; AI Builder
+          Software Developer · Full-Stack, Backend &amp; AI
         </p>
         <p className="hero-desc fade-up d3">
-          Building intelligent, scalable, user-centric web systems — from sleek
-          frontends to resilient backends and agentic AI pipelines.
+          Building web applications, backend APIs and automation workflows —
+          with a growing focus on reliable cloud and distributed software.
         </p>
         <div className="hero-pills fade-up d4">
           {[
+            "Python",
+            "TypeScript",
             "React.js",
             "Node.js",
-            "TypeScript",
-            "MongoDB",
-            "Agentic AI",
-            "MLOps",
+            "PostgreSQL",
             "Docker",
+            "MLOps",
+            "Agentic AI",
           ].map((p) => (
             <span key={p} className="pill">
               {p}
@@ -2073,20 +2198,20 @@ export default function Portfolio() {
                 through code &amp; AI
               </h2>
               <p className="about-p">
-                I'm a final-year Computer Science student at Jain University,
-                Bengaluru, passionate about building end-to-end systems that
-                solve real problems — from REST APIs to trading dashboards to ML
-                experiment trackers.
+                I'm a Computer Science graduate from Jain University, Bengaluru,
+                and a software developer building web applications, backend APIs
+                and automation workflows. I currently work at TYCHR on React and
+                Node.js products, PostgreSQL, and production debugging.
               </p>
               <p className="about-p">
-                Exploring Agentic AI with LangChain, LangFlow &amp; HuggingFace,
-                while sharpening DSA skills on LeetCode with Java. I thrive at
-                the intersection of great UX and solid engineering.
+                I'm interested in building reliable cloud and distributed
+                software, and I keep exploring Agentic AI with LangChain &amp;
+                HuggingFace while sharpening DSA skills on LeetCode with Java.
               </p>
               <div className="stats">
                 {[
                   ["3+", "Full-Stack Projects"],
-                  ["2", "Industry Roles"],
+                  ["3", "Industry Roles"],
                   ["7.4", "CGPA"],
                 ].map(([n, l]) => (
                   <div key={l} className="stat">
@@ -2102,148 +2227,35 @@ export default function Portfolio() {
 
       <div className="divider" />
 
-      {/* ── SKILLS ── */}
-      <section id="skills">
-        <div className="section-inner">
-          <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
-            <div className="sec-label" style={{ justifyContent: "center" }}>
-              Technical Arsenal
-            </div>
-            <h2 className="sec-title">
-              Skills &amp; <span className="hl">Technologies</span>
-            </h2>
-          </div>
-          <div className="skills-grid">
-            {[
-              [
-                "Languages",
-                [
-                  "JavaScript",
-                  "TypeScript",
-                  "Java",
-                  "Python",
-                  "C",
-                  "PHP",
-                  "HTML",
-                  "CSS",
-                ],
-              ],
-              [
-                "Frameworks",
-                [
-                  "React.js",
-                  "Next.js",
-                  "Node.js",
-                  "Express",
-                  "Django",
-                  "Tailwind CSS",
-                ],
-              ],
-              ["Databases", ["MongoDB", "PostgreSQL", "SQL", "Prisma ORM"]],
-              [
-                "Auth & APIs",
-                ["JWT", "OAuth", "NextAuth.js", "REST APIs", "TanStack Query"],
-              ],
-              [
-                "DevOps & MLOps",
-                ["Docker", "GitHub Actions", "MLflow", "CI/CD", "Cloud Deploy"],
-              ],
-              [
-                "AI & ML",
-                ["LangChain", "LangFlow", "HuggingFace", "RAG", "Agentic AI"],
-              ],
-            ].map(([cat, tags]) => (
-              <div key={cat} className="sk-card glass fade-up">
-                <div className="sk-cat">{cat}</div>
-                <div className="sk-tags">
-                  {tags.map((t) => (
-                    <span key={t} className="sk-tag">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="divider" />
-
-      {/* ── CURRENTLY BUILDING ── */}
-      <section id="building">
-        <div className="section-inner">
-          <div className="sec-label">Right Now</div>
-          <h2 className="sec-title">
-            Currently <span className="hl">Building &amp; Learning</span>
-          </h2>
-          <div className="building-grid">
-            {[
-              {
-                icon: "🤖",
-                title: "Agentic AI with LangChain",
-                desc: "Building RAG-powered agents using LangChain and LangFlow — multi-step pipelines that reason, retrieve, and respond autonomously.",
-                color: C.accent,
-                label: "Active",
-              },
-              {
-                icon: "⚔️",
-                title: "DSA in Java — LeetCode",
-                desc: "Consistently solving DSA problems on LeetCode with Java, covering trees, graphs, DP, sliding window, and two-pointer patterns.",
-                color: C.accent3,
-                label: "Daily Practice",
-              },
-              {
-                icon: "🧠",
-                title: "HuggingFace & Fine-tuning",
-                desc: "Exploring open-source models on HuggingFace — embeddings, tokenizers, and lightweight fine-tuning for custom use cases.",
-                color: C.accent,
-                label: "Exploring",
-              },
-            ].map(({ icon, title, desc, color, label }, i) => (
-              <div key={i} className="build-card glass">
-                <div className="build-icon">{icon}</div>
-                <div className="build-title">{title}</div>
-                <div className="build-desc">{desc}</div>
-                <div className="build-status">
-                  <span className="sdot" style={{ background: color }} />
-                  <span style={{ color }}>{label}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="divider" />
-
       {/* ── EXPERIENCE ── */}
       <section id="experience">
         <div className="section-inner">
-          <div className="sec-label">Work History</div>
-          <h2 className="sec-title">
-            Professional <span className="hl">Experience</span>
-          </h2>
-          <div className="timeline">
+          <div className="split">
+            <div className="split-head">
+              <div className="sec-label">Work History</div>
+              <h2 className="sec-title">
+                Professional <span className="hl">Experience</span>
+              </h2>
+            </div>
+            <div className="timeline">
             <div className="tl-item">
               <div className="tl-dot" />
-              <div className="tl-date">May 2025 – Oct 2025</div>
-              <div className="tl-role">Full Stack Developer</div>
-              <div className="tl-company">
-                RegistrationWallah.com · Freelance · Remote
-              </div>
+              <div className="tl-date">Apr 2026 – Present</div>
+              <div className="tl-role">Full Stack Developer Intern</div>
+              <div className="tl-company">TYCHR Pvt. Ltd.</div>
               <ul className="tl-list">
                 <li>
-                  Built the official website from scratch using the MERN Stack
-                  with JWT authentication
+                  Develop React interfaces and backend APIs using Node.js and
+                  Strapi, including custom controllers, services and middleware
                 </li>
                 <li>
-                  Integrated WhatsApp API for real-time customer chat
-                  communication
+                  Work with PostgreSQL; investigate production issues using
+                  Sentry and application logs, and contribute fixes through Git
+                  reviews and pull requests
                 </li>
                 <li>
-                  Built a custom ChatBot trained on company data for handling
-                  routine queries
+                  Support browser-based automation testing with Playwright
+                  (Chromium) and Selenium
                 </li>
               </ul>
             </div>
@@ -2256,26 +2268,43 @@ export default function Portfolio() {
                 }}
               />
               <div className="tl-date" style={{ color: C.accent2 }}>
-                Jun 2024 – Jul 2024
+                Feb 2026 – Aug 2026
               </div>
-              <div className="tl-role">Backend Developer Intern</div>
+              <div className="tl-role">Trainee Software Developer</div>
+              <div className="tl-company">Zortech Solutions Pvt. Ltd.</div>
+              <ul className="tl-list">
+                <li>
+                  Contributed to ZorHire, a multi-tenant recruitment SaaS, using
+                  React, Node.js, Express.js and PostgreSQL
+                </li>
+                <li>
+                  Worked on recruiter workflows, hiring pipelines, dashboards,
+                  role-based access control, tenant-aware data access and bulk
+                  email features
+                </li>
+              </ul>
+            </div>
+            <div className="tl-item">
+              <div className="tl-dot" />
+              <div className="tl-date">Jun 2024 – Jul 2024</div>
+              <div className="tl-role">Developer Intern</div>
               <div className="tl-company">
                 Zortech Solutions Pvt. Ltd. · Remote
               </div>
               <ul className="tl-list">
                 <li>
-                  Developed REST APIs for internal services using Node.js and
-                  Express
+                  Built and integrated Node.js/Express REST APIs with MongoDB
                 </li>
                 <li>
-                  Implemented JWT-based authentication and MongoDB queries for
-                  secure data retrieval
+                  Worked on JWT authentication, database queries and API
+                  debugging
                 </li>
                 <li>
                   Collaborated with frontend team to define request structures
                   and improve performance
                 </li>
               </ul>
+            </div>
             </div>
           </div>
         </div>
@@ -2295,17 +2324,30 @@ export default function Portfolio() {
               {
                 id: "pc1",
                 yr: "2026",
-                title: "MLOps — Experiment Tracker",
-                desc: "ML experiment tracking with MLflow Model Registry, lifecycle management, versioning & reproducibility. Docker-deployed with REST API triggers.",
-                stack: ["Python", "MLflow", "Docker", "REST APIs", "Cloud"],
+                title: "MLOps Pipeline",
+                desc: "ML workflow with model and experiment tracking and automated CI workflows. Services packaged with Docker and deployed to Render.",
+                stack: [
+                  "Python",
+                  "FastAPI",
+                  "scikit-learn",
+                  "MLflow",
+                  "Docker",
+                  "GitHub Actions",
+                ],
                 Scene: TorusKnotScene,
               },
               {
                 id: "pc2",
                 yr: "2025",
                 title: "QuantForge — AI Trading Platform",
-                desc: "Crypto dashboard with AI-generated BUY/SELL/HOLD signals across 15+ pairs. Strategy Builder with CRUD, backtesting & live TanStack Query feed.",
-                stack: ["React.js", "TypeScript", "PostgreSQL", "Recharts"],
+                desc: "Crypto dashboard and trading journal with AI-generated BUY/SELL/HOLD signals across 15+ pairs. Strategy Builder with CRUD, backtesting, analytics & a live TanStack Query market-data feed.",
+                stack: [
+                  "React.js",
+                  "TypeScript",
+                  "Node.js",
+                  "PostgreSQL",
+                  "Recharts",
+                ],
                 Scene: OctaClusterScene,
               },
               {
@@ -2346,12 +2388,161 @@ export default function Portfolio() {
 
       <div className="divider" />
 
+      {/* ── SKILLS ── */}
+      <section id="skills">
+        <div className="section-inner">
+          <div style={{ marginBottom: "2.5rem" }}>
+            <div className="sec-label">Technical Arsenal</div>
+            <h2 className="sec-title">
+              Skills &amp; <span className="hl">Technologies</span>
+            </h2>
+          </div>
+          <div className="skills-grid">
+            {[
+              [
+                "Languages",
+                [
+                  "JavaScript",
+                  "TypeScript",
+                  "Python",
+                  "SQL",
+                  "Java",
+                  "C",
+                  "PHP",
+                  "HTML",
+                  "CSS",
+                ],
+              ],
+              [
+                "Frameworks",
+                [
+                  "React.js",
+                  "Next.js",
+                  "Node.js",
+                  "Express",
+                  "FastAPI",
+                  "Strapi",
+                  "Django",
+                  "Tailwind CSS",
+                ],
+              ],
+              ["Databases", ["PostgreSQL", "MongoDB", "Prisma ORM"]],
+              [
+                "Auth & APIs",
+                ["JWT", "OAuth", "NextAuth.js", "REST APIs", "TanStack Query"],
+              ],
+              [
+                "Cloud, DevOps & MLOps",
+                [
+                  "AWS EC2 (Exposure)",
+                  "Docker",
+                  "GitHub Actions",
+                  "CI/CD",
+                  "Linux/Unix CLI",
+                  "MLflow",
+                ],
+              ],
+              [
+                "AI & ML",
+                [
+                  "LangChain",
+                  "LangFlow",
+                  "HuggingFace",
+                  "scikit-learn",
+                  "RAG",
+                  "Agentic AI",
+                ],
+              ],
+              [
+                "Testing & Reliability",
+                [
+                  "Playwright",
+                  "Selenium",
+                  "Postman",
+                  "Sentry",
+                  "Log Debugging",
+                ],
+              ],
+              [
+                "Concepts",
+                ["OOP", "RBAC", "API Design", "SDLC", "Automated Testing"],
+              ],
+            ].map(([cat, tags]) => (
+              <div key={cat} className="sk-card glass fade-up">
+                <div className="sk-cat">{cat}</div>
+                <div className="sk-tags">
+                  {tags.map((t) => (
+                    <span key={t} className="sk-tag">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="divider" />
+
+      {/* ── CURRENTLY BUILDING ── */}
+      <section id="building">
+        <div className="section-inner">
+          <div className="sec-label">Right Now</div>
+          <h2 className="sec-title">
+            Currently <span className="hl">Building &amp; Learning</span>
+          </h2>
+          <div className="building-grid">
+            {[
+              {
+                icon: ICON_NETWORK,
+                title: "Agentic AI with LangChain",
+                desc: "Building RAG-powered agents using LangChain and LangFlow — multi-step pipelines that reason, retrieve, and respond autonomously.",
+                color: C.accent,
+                label: "Active",
+              },
+              {
+                icon: ICON_CODE,
+                title: "DSA in Java — LeetCode",
+                desc: "Consistently solving DSA problems on LeetCode with Java, covering trees, graphs, DP, sliding window, and two-pointer patterns.",
+                color: C.accent3,
+                label: "Daily Practice",
+              },
+              {
+                icon: ICON_LAYERS,
+                title: "HuggingFace & Fine-tuning",
+                desc: "Exploring open-source models on HuggingFace — embeddings, tokenizers, and lightweight fine-tuning for custom use cases.",
+                color: C.accent,
+                label: "Exploring",
+              },
+            ].map(({ icon, title, desc, color, label }, i) => (
+              <div key={i} className="build-card glass">
+                <div className="build-icon" style={{ color }}>
+                  <Icon>{icon}</Icon>
+                </div>
+                <div className="build-title">{title}</div>
+                <div className="build-desc">{desc}</div>
+                <div className="build-status">
+                  <span className="sdot" style={{ background: color }} />
+                  <span style={{ color }}>{label}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="divider" />
+
       {/* ── EDUCATION ── */}
       <section id="education">
         <div className="section-inner">
-          <div className="sec-label">Academic Background</div>
-          <h2 className="sec-title">Education</h2>
-          <div className="edu-grid">
+          <div className="split">
+            <div className="split-head">
+              <div className="sec-label">Academic Background</div>
+              <h2 className="sec-title">Education</h2>
+            </div>
+            <div className="edu-grid">
             {[
               {
                 deg: "B.Tech — Computer Science Engineering",
@@ -2359,7 +2550,7 @@ export default function Portfolio() {
                 yr: "2022 – 2026",
                 score: "7.4",
                 unit: "CGPA",
-                label: "Current Score",
+                label: "Final Score",
               },
               {
                 deg: "Class XII — Science Stream",
@@ -2393,6 +2584,7 @@ export default function Portfolio() {
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </section>
@@ -2478,9 +2670,12 @@ export default function Portfolio() {
                 lineHeight: 1.9,
               }}
             >
-              Open to internships, full-time roles, freelance work &amp;
-              exciting collaborations. I reply fast.
+              Open to full-time roles, freelance work &amp; exciting
+              collaborations. I reply fast.
             </p>
+            <a className="contact-email" href="mailto:hellocoder78@gmail.com">
+              hellocoder78@gmail.com
+            </a>
 
             <ContactForm />
             <div className="cinfo-grid">
@@ -2488,7 +2683,7 @@ export default function Portfolio() {
                 ["Phone", "+91 9883891806"],
                 ["Location", "Bengaluru, Karnataka"],
                 ["Availability", "Open to Opportunities", C.accent],
-                ["Graduating", "May 2026 · B.Tech CS"],
+                ["Graduated", "2026 · B.Tech CSE"],
               ].map(([label, val, color]) => (
                 <div key={label} className="cinfo-card glass">
                   <div className="cinfo-label">{label}</div>
